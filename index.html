@@ -1,0 +1,648 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Anna 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Dancing+Script:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe0ec, #ffc1d9, #fff0f5);
+    font-family: 'Nunito', sans-serif;
+    color: #a83260;
+    overflow-x: hidden;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 18px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    animation: appear 0.7s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-size: clamp(2.2rem, 7vw, 3.5rem);
+    color: #d63375;
+}
+
+h2 {
+    color: #c42d69;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin: 15px 0 25px;
+}
+
+.emoji {
+    font-size: 90px;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+.btn {
+    padding: 13px 35px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #ff4f91, #e52c75);
+    color: white;
+    font-size: 17px;
+    font-weight: 800;
+    margin: 10px;
+    box-shadow: 0 5px 15px #e85b9170;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.08);
+}
+
+.btn-outline {
+    background: white;
+    color: #d63375;
+    border: 2px solid #ff75a9;
+}
+
+/* QUESTION CARDS */
+
+.question-card {
+    background: #fff9fc;
+    padding: 30px 20px;
+    margin: 14px auto;
+    width: min(420px, 95%);
+    border-radius: 25px;
+    box-shadow: 0 8px 22px #d94d8030;
+    border: 2px solid #ffc1d9;
+    animation: appear 0.5s ease;
+}
+
+.question-card h2 {
+    font-size: 21px;
+}
+
+.answer {
+    display: inline-block;
+    padding: 10px 45px;
+    border-radius: 30px;
+    background: #ffe0ed;
+    color: #d63375;
+    font-size: 20px;
+    font-weight: 900;
+    border: 2px solid #ff9fc1;
+    margin-top: 12px;
+}
+
+.hidden-card {
+    display: none;
+}
+
+.heart {
+    position: fixed;
+    color: #ff4081;
+    pointer-events: none;
+    animation: heartFall 5s linear infinite;
+    z-index: 0;
+}
+
+@keyframes heartFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* LETTER */
+
+.letter {
+    max-width: 750px;
+    width: 95%;
+    background: #fffafd;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px #d94d8030;
+    text-align: left;
+    line-height: 1.9;
+    font-size: 16px;
+    white-space: pre-line;
+}
+
+.letter h2 {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+}
+
+/* RESPONSE */
+
+.message-box {
+    background: #fffafd;
+    padding: 35px 25px;
+    border-radius: 30px;
+    width: min(450px, 95%);
+    box-shadow: 0 8px 25px #d94d8030;
+}
+
+.message-box h1 {
+    font-size: 30px;
+}
+
+#sorryMessages p {
+    font-size: 21px;
+    font-weight: 900;
+    padding: 12px;
+    margin: 10px;
+    background: #ffe0ed;
+    border-radius: 20px;
+}
+
+/* FINAL CERTIFICATE */
+
+.certificate {
+    max-width: 650px;
+    width: 95%;
+    background: #fffafc;
+    padding: 30px 20px;
+    border: 8px double #ef82aa;
+    border-radius: 15px;
+    box-shadow: 0 10px 35px #c42d6930;
+    position: relative;
+}
+
+.certificate h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+}
+
+.certificate h2 {
+    margin-top: 15px;
+    font-size: 28px;
+}
+
+.certificate p {
+    margin: 12px;
+    font-size: 17px;
+}
+
+.hug {
+    font-size: 75px;
+    margin: 15px;
+    animation: hug 2s infinite ease-in-out;
+}
+
+@keyframes hug {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.13); }
+}
+
+.love-animation {
+    font-size: 65px;
+    animation: heartbeat 1s infinite;
+    margin: 20px;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    color: #e52c75;
+}
+
+#questionArea {
+    width: 100%;
+}
+
+@media(max-width: 500px) {
+    .letter {
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    .question-card {
+        padding: 22px 12px;
+    }
+
+    .certificate h1 {
+        font-size: 32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING HEARTS -->
+<div id="hearts"></div>
+
+<!-- SCREEN 1: WELCOME -->
+
+<section class="screen active" id="welcome">
+
+    <div class="emoji">🧸💗</div>
+
+    <h1>Sorry Anna... 💗</h1>
+
+    <p class="subtitle">
+        A little page from your kutty papa... 🥺
+        <br><br>
+        Made with lots and lots of love for my Anna.
+    </p>
+
+    <button class="btn" onclick="showScreen('questions')">
+        Click to Start 💕
+    </button>
+
+</section>
+
+
+<!-- SCREEN 2: QUESTIONS -->
+
+<section class="screen" id="questions">
+
+    <h1>Answer for me, Anna 💗</h1>
+
+    <p class="subtitle">You better know all the answers! 😤💕</p>
+
+    <div id="questionArea">
+
+        <div class="question-card" id="q1">
+            <h2>💗 Who is my little charm?</h2>
+            <button class="answer" onclick="reveal(1)">Anna 💗</button>
+        </div>
+
+        <div class="question-card hidden-card" id="q2">
+            <h2>💗 Who is my whole world?</h2>
+            <button class="answer" onclick="reveal(2)">Anna 💗</button>
+        </div>
+
+        <div class="question-card hidden-card" id="q3">
+            <h2>💗 Who is my happiness?</h2>
+            <button class="answer" onclick="reveal(3)">Anna 💗</button>
+        </div>
+
+        <div class="question-card hidden-card" id="q4">
+            <h2>💗 Who is my entire life?</h2>
+            <button class="answer" onclick="reveal(4)">Anna 💗</button>
+        </div>
+
+    </div>
+
+    <p id="questionProgress">Question 1 of 4 💗</p>
+
+    <button class="btn" id="nextQuestion"
+        style="display:none" onclick="showScreen('letter')">
+        Next 💗
+    </button>
+
+</section>
+
+
+<!-- SCREEN 3: APOLOGY LETTER -->
+
+<section class="screen" id="letter">
+
+    <h1>Anna... 💗</h1>
+
+    <p class="subtitle">Konjam porumaiya padi Anna 🥺</p>
+
+    <div class="letter">
+
+        <h2>My Dear Anna 💗</h2>
+
+        Anna na sorryyy , na apd inime panna mata , nalla papa va irupa , i will be with you always , vitu pga mata , enna vitu poiradha, enakunu yaru ila
+        una nambhi matu thaa iruka, ni pesna elame kovathula thaa pesna nu na nambura
+
+        inaiku oru bad day ah nenachu marandharla anna, epaiyu pola irukala
+        ini namma ipd onna irukaporadhe konja naal thaa, adhulaiyu sandai potutu poga venda
+
+        enaku una vita yaru iruka solu , enaku edhume theriyadhu anna, elame ni thaa
+        niye veruthalum naai mari unna suthi thaa varuva
+
+        na ena panalum enna vitutu poiradha surya , enakunu yarume ila, yaru enkuda irukavu matanga
+        iruka pora konja naal la , na unkuda iruntu poyara , pleaseee
+
+        na panna elathukume sorryyy 💗
+
+    </div>
+
+    <button class="btn" onclick="showScreen('accept')">
+        Sorry accept panriya? 🥺
+    </button>
+
+</section>
+
+
+<!-- SCREEN 4: ACCEPT OR NOT -->
+
+<section class="screen" id="accept">
+
+    <div class="message-box">
+
+        <div class="emoji">🥺💗</div>
+
+        <h1>Sorry accept panriya Anna?</h1>
+
+        <p class="subtitle">Please sollu Annaaa... 🥹</p>
+
+        <button class="btn" onclick="accepted()">
+            YES 💗
+        </button>
+
+        <button class="btn btn-outline" onclick="rejected()">
+            NO 🥺
+        </button>
+
+        <div id="sorryMessages"></div>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 5: THANK YOU -->
+
+<section class="screen" id="thankyou">
+
+    <div class="message-box">
+
+        <div class="emoji">😭💗</div>
+
+        <h1>Thank you Annaaaa!!</h1>
+
+        <p class="subtitle">
+            Naanu ma? 🥺💕
+            <br>
+            Am I your kutty papa?
+        </p>
+
+        <button class="btn" onclick="finalLove()">
+            YESSSS 💗
+        </button>
+
+        <button class="btn btn-outline" onclick="rejected()">
+            NOOO 😭
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 6: LOVE ANIMATION -->
+
+<section class="screen" id="love">
+
+    <div class="love-animation">💗</div>
+
+    <h1>I LOVE YOU ANNA!!</h1>
+
+    <div class="emoji">🧸💕🐭</div>
+
+    <h2>Forever my favourite person!</h2>
+
+    <p class="subtitle">
+        No matter what happens, you will always be my Anna.
+        <br>
+        Unkooda sanda potalum, unna romba pidikum! 💗
+    </p>
+
+    <button class="btn" onclick="showScreen('certificate')">
+        One Last Surprise 🎁
+    </button>
+
+</section>
+
+
+<!-- SCREEN 7: CERTIFICATE -->
+
+<section class="screen" id="certificate">
+
+    <div class="certificate">
+
+        <div class="emoji">👑💗</div>
+
+        <h1>Certificate of Appreciation</h1>
+
+        <p>This certificate is proudly presented to</p>
+
+        <h2>MY ANNA 💗</h2>
+
+        <h2>🏆 BEST BROTHER EVER 🏆</h2>
+
+        <p>
+            For being the most special person in my life.
+        </p>
+
+        <!-- Teddy and rat hugging illustration -->
+        <div class="hug">
+            🧸🤗🐭
+        </div>
+
+        <p>Officially certified as:</p>
+
+        <p>💗 My Little Charm</p>
+        <p>💗 My Whole World</p>
+        <p>💗 My Happiness</p>
+        <p>💗 My Forever Anna</p>
+
+        <br>
+
+        <p>With lots and lots of love,</p>
+
+        <div class="signature">
+            Your Papa 💕
+        </div>
+
+        <p>Issued with unlimited love. ♾️</p>
+
+    </div>
+
+    <button class="btn" onclick="window.print()">
+        Save Certificate 💗
+    </button>
+
+    <button class="btn btn-outline" onclick="showScreen('welcome')">
+        Replay Our Story 🔁
+    </button>
+
+</section>
+
+
+<script>
+
+// SCREEN NAVIGATION
+
+function showScreen(id) {
+
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+// QUESTIONS ONE BY ONE
+
+let currentQuestion = 1;
+
+function reveal(number) {
+
+    if (number !== currentQuestion) return;
+
+    if (number < 4) {
+
+        document.getElementById('q' + (number + 1))
+            .classList.remove('hidden-card');
+
+        currentQuestion++;
+
+        document.getElementById('questionProgress').innerText =
+            'Question ' + currentQuestion + ' of 4 💗';
+
+    } else {
+
+        document.getElementById('questionProgress').innerText =
+            'All answers correct! You are my everything Anna! 💗';
+
+        document.getElementById('nextQuestion').style.display =
+            'inline-block';
+
+    }
+
+}
+
+
+// YES RESPONSE
+
+function accepted() {
+
+    showScreen('thankyou');
+
+}
+
+
+// NO RESPONSE
+
+let noCount = 0;
+
+function rejected() {
+
+    noCount++;
+
+    const messages = document.getElementById('sorryMessages');
+
+    messages.innerHTML = `
+        <p>💋 Ummaahhh Annaaa!</p>
+        <p>🥺 Unmaiya sorrryyy!</p>
+        <p>💗 Please forgive me Anna!</p>
+    `;
+
+    if (noCount >= 3) {
+        messages.innerHTML += `
+            <h2>Innum sorry solluven Anna! 😭</h2>
+            <button class="btn" onclick="tryAgain()">
+                Once more? 💗
+            </button>
+        `;
+    }
+
+}
+
+
+// TRY AGAIN
+
+function tryAgain() {
+
+    noCount = 0;
+
+    document.getElementById('sorryMessages').innerHTML = '';
+
+}
+
+
+// FINAL LOVE
+
+function finalLove() {
+
+    showScreen('love');
+
+    createHearts();
+
+}
+
+
+// FLOATING HEART ANIMATION
+
+function createHearts() {
+
+    for (let i = 0; i < 35; i++) {
+
+        setTimeout(() => {
+
+            let heart = document.createElement('div');
+
+            heart.innerHTML = ['💗', '💕', '💖', '❤️', '💘'][
+                Math.floor(Math.random() * 5)
+            ];
+
+            heart.className = 'heart';
+
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+            heart.style.animationDuration = (3 + Math.random() * 4) + 's';
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 7000);
+
+        }, i * 120);
+
+    }
+
+}
+
+
+// START FLOATING HEARTS
+
+setInterval(createHearts, 4000);
+
+</script>
+
+</body>
+</html>
